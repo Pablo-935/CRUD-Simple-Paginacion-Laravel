@@ -10,6 +10,12 @@
     <title>@yield('title')</title>
 </head>
 <body data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand text-success-emphasis" href="#">CRUD con Laravel-Grupo Insano</a>
+        </div>
+    </nav>
+  
     <main>
         @yield('content')
     </main>
