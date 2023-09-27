@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\GoogleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
 // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 // Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 // Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -26,7 +30,11 @@ Route::get('/', function () {
 // Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 // Route::get('producs/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductController::class)->middleware('auth');
 
 // Route::resource('products', ProductController::class)->names('products');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('/google/callback', [GoogleController::class, 'handleGoogleCallback']);
